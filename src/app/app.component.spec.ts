@@ -30,6 +30,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.header h1')?.textContent).toContain('Angular 15 Fundamentals');
+    expect(compiled.querySelector('.header strong')?.textContent).toContain('Angular 15 Fundamentals');
   });
 });
