@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular15-fundamentals'`, () => {
+  it(`should have as title 'Angular 15 Fundamentals'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular15-fundamentals');
+    expect(app.title).toEqual('Angular 15 Fundamentals');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular15-fundamentals app is running!');
+    expect(compiled.querySelector('.header h1')?.textContent).toContain('Angular 15 Fundamentals');
   });
 });
