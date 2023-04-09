@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ItemListComponent } from './containers/item-list/item-list.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ItemListComponent
+  ],
   imports: [
     CommonModule
   ]
