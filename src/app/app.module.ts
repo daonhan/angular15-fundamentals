@@ -18,9 +18,15 @@ const routes: Routes = [
       {
         path: 'item',
         component: ItemDetailsComponent
-      }
+      },
+      { path: '', redirectTo: 'items', pathMatch: 'full' }
     ],
   },
+  {
+    path: '',
+    redirectTo: 'admin',
+    pathMatch: 'full'
+  }
 ]
 
 @NgModule({
