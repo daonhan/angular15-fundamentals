@@ -8,6 +8,7 @@ import { ItemDetailsComponent } from './containers/item-details/item-details.com
 // components
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemFormComponent } from './components/item-form/item-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations:
@@ -18,7 +19,8 @@ import { ItemFormComponent } from './components/item-form/item-form.component';
       ItemFormComponent
     ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [ItemListComponent, ItemDetailsComponent]
 })

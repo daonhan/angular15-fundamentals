@@ -1,1 +1,7 @@
-<p>item-form works!</p>
+<form class="item-form" #formRef="ngForm">
+  <label>
+    <span>Name</span>
+    <input type="text" class="input" name="name" placeholder="Name" ngModel>
+  </label>
+  <pre>{{formRef.value | json}}</pre>
+</form>
