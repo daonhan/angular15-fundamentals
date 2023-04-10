@@ -11,22 +11,33 @@ export class ItemDetailsComponent implements OnInit {
   item!: Item;
   constructor(private itemService: ItemService) { }
   ngOnInit(): void {
-    this.itemService.readOne('1').subscribe(item => this.item = item);
+    this.itemService.readOne('12').subscribe(item => this.item = item);
   }
 
   onCreate(item: Item) {
-    this.itemService.create(item).subscribe((item) => {
-      console.log(`Created successful!`)
+    this.itemService.create(item).subscribe({
+      next: (item) => {
+        console.log(`Created successful!`)
+      },
+      error: (err) => console.error(err)
     });
   }
   onUpdate(item: Item) {
-    this.itemService.update(item).subscribe((item) => {
-      console.log(`Updated successful!`)
+    this.itemService.update(item).subscribe({
+      next: () => {
+        console.log(`Updated successful!`)
+      },
+      error: (err) => {
+        console.error(err);
+      }
     });
   }
   onDelete(playload: Item) {
-    this.itemService.delete(playload).subscribe(() => {
-      console.log('Deleted successful');
+    this.itemService.delete(playload).subscribe({
+      next: () => {
+        console.log('Deleted successful');
+      },
+      error: (err) => { console.error(err) }
     });
   }
 }

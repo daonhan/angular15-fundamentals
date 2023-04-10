@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
-import { HttpClient } from '@angular/common/http';
-import { map, of, tap } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map, of, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class ItemService {
   create(playload: Item) {
     return this.httpClient.post<Item>(`/api/items`, playload).pipe(tap((item: Item) => {
       this.items = [...this.items, item];
-    }));
+    }), catchError(this.handleError));
   }
 
   update(playload: Item) {
@@ -42,11 +42,22 @@ export class ItemService {
           }
           return i;
         });
-      }));
+      }), catchError(this.handleError));
   }
   delete(playload: Item) {
     return this.httpClient.delete(`/api/items/${playload.id}`).pipe(tap(() => {
       this.items = this.items.filter(i => i.id !== playload.id);
-    }));
+    }), catchError(this.handleError));
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    if (err instanceof ErrorEvent) {
+      // client side
+      console.error(err)
+    } else {
+      // server side
+      console.error('Server', err.status)
+    }
+    return throwError(() => new Error(err.message));
   }
 }
