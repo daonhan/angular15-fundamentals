@@ -7,5 +7,17 @@
     <span>Price</span>
     <input type="number" class="input" name="price" placeholder="Price" ngModel>
   </label>
+  <div class="item-form-radios">
+    <p class="item-form-radios-label">Promo:</p>
+    <label>
+      <input type="radio" name="promo" [value]="undefined" ngModel> <span>None</span>
+    </label>
+    <label>
+      <input type="radio" name="promo" value="new" ngModel> <span>New</span>
+    </label>
+    <label>
+      <input type="radio" name="promo" value="limited" ngModel> <span>Limited</span>
+    </label>
+  </div>
   <pre>{{formRef.value | json}}</pre>
 </form>
