@@ -18,7 +18,7 @@ export const routes: Routes = [
     component: ItemListComponent
   },
   {
-    path: 'item',
+    path: 'items/:id',
     component: ItemDetailsComponent
   },
   { path: '', redirectTo: 'items', pathMatch: 'full' }

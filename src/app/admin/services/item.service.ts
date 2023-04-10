@@ -23,7 +23,7 @@ export class ItemService {
       retryWhen((errors) => errors.pipe(tap(console), delay(2000), take(2))), catchError(this.handleError));
   }
 
-  readOne(id: string) {
+  readOne(id: string | null) {
     return this.read().pipe(map(items => {
       const item = items.find(i => i.id === id);
       if (item) {

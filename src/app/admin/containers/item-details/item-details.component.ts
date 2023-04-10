@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item.model';
 import { ItemService } from '../../services/item.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-item-details',
@@ -9,9 +10,12 @@ import { ItemService } from '../../services/item.service';
 })
 export class ItemDetailsComponent implements OnInit {
   item!: Item;
-  constructor(private itemService: ItemService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private itemService: ItemService) { }
   ngOnInit(): void {
-    this.itemService.readOne('1').subscribe(item => this.item = item);
+    const id = this.route.snapshot.paramMap.get('id');
+    this.itemService.readOne(id).subscribe(item => this.item = item);
   }
 
   onCreate(item: Item) {
