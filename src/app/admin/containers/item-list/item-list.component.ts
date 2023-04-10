@@ -9,15 +9,15 @@ import { ItemService } from '../../services/item.service';
 })
 export class ItemListComponent implements OnInit {
 
-  items!: Item[];
+  items: Item[] = [];
   item!: Item;
 
   constructor(private itemService: ItemService) {
 
   }
   ngOnInit(): void {
-    this.items = this.itemService.read();
-    this.item = this.items[0];
+    this.itemService.read().subscribe((items: Item[]) => this.items = items);
+    // this.item = this.items[0];
   }
   trackById(index: number, item: Item) {
     return item.id;

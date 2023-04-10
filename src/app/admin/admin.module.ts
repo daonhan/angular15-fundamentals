@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 // containers
 import { ItemListComponent } from './containers/item-list/item-list.component';
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     ],
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule
   ],
   exports: [ItemListComponent, ItemDetailsComponent]
