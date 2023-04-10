@@ -45,10 +45,10 @@
       <p class="item-form-error" *ngIf="description.errors?.['required']">Description is required</p>
     </ng-container>
   </label>
-  <button type="button" class="btn btn--green" (click)="handleCreate(form)">Create</button>
-  <button type="button" class="btn btn--green" (click)="handleUpdate(form)">Update</button>
-  <button type="button" class="btn btn--green" (click)="handleDelete()">Delete</button>
-  <button type="button" class="btn btn--gray" (click)="form.resetForm()">Reset</button>
+  <button type="button" class="btn btn--green" (click)="handleCreate(form)" *ngIf="!isEdit">Create</button>
+  <button type="button" class="btn btn--green" (click)="handleUpdate(form)" *ngIf="isEdit">Update</button>
+  <button type="button" class="btn btn--green" (click)="handleDelete()" *ngIf="isEdit">Delete</button>
+  <button type="button" class="btn btn--gray" (click)="form.resetForm()" *ngIf="form.touched || isEdit">Reset</button>
   <div class="item-form-working" *ngIf="form.valid && form.submitted">
     Saving...
   </div>

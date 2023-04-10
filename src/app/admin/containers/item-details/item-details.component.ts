@@ -10,10 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ItemDetailsComponent implements OnInit {
   item!: Item;
+  isEdit!: boolean;
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService) { }
   ngOnInit(): void {
+    this.isEdit = this.route.snapshot.data['isEdit'];
     const id = this.route.snapshot.paramMap.get('id');
     this.itemService.readOne(id).subscribe(item => this.item = item);
   }

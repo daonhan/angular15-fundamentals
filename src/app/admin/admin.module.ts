@@ -18,8 +18,13 @@ export const routes: Routes = [
     component: ItemListComponent
   },
   {
+    path: 'items/new',
+    component: ItemDetailsComponent,
+  },
+  {
     path: 'items/:id',
-    component: ItemDetailsComponent
+    component: ItemDetailsComponent,
+    data: { isEdit: true }
   },
   { path: '', redirectTo: 'items', pathMatch: 'full' }
 ];

@@ -10,6 +10,7 @@ import { Item } from '../../models/item.model';
 export class ItemFormComponent {
 
   @Input() item!: Item;
+  @Input() isEdit!: boolean;
   @Output() create = new EventEmitter<Item>();
   @Output() update = new EventEmitter<Item>();
   @Output() delete = new EventEmitter<Item>();
