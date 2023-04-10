@@ -1,22 +1,33 @@
 <form class="item-form" #formRef="ngForm">
   <label>
     <span>Name</span>
-    <input type="text" class="input" name="name" placeholder="Name" required ngModel>
+    <input type="text" class="input" name="name" placeholder="Name" required minlength="5" ngModel #name="ngModel">
+    <ng-container *ngIf="name.invalid && (name.dirty || name.touched)">
+      <p class="item-form-error" *ngIf="name.errors?.['required']">Name is required</p>
+      <p class="item-form-error" *ngIf="name.errors?.['minlength']">Minimum length of a name is 5!</p>
+    </ng-container>
   </label>
   <label>
     <span>Price</span>
-    <input type="number" class="input" name="price" placeholder="Price" required ngModel>
+    <input type="number" class="input" name="price" min="0" placeholder="Price" required ngModel #price="ngModel">
+    <ng-container *ngIf="price.invalid && (price.dirty || price.touched)">
+      <p class="item-form-error" *ngIf="price.errors?.['required']">Price is required</p>
+      <p class="item-form-error" *ngIf="price.errors?.['min']">Minimum of a price is 0!</p>
+    </ng-container>
   </label>
   <label>
     <span>Icon</span>
-    <select class="input" name="icon" required ngModel>
+    <select class="input" name="icon" required ngModel #icon="ngModel">
       <option *ngFor="let icon of icons" [ngValue]="icon">{{icon}}</option>
     </select>
+    <ng-container *ngIf="icon.invalid && (icon.dirty || icon.touched)">
+      <p class="item-form-error" *ngIf="icon.errors?.['required']">Icon is required</p>
+    </ng-container>
   </label>
   <div class="item-form-radios">
     <p class="item-form-radios-label">Promo:</p>
     <label>
-      <input type="radio" name="promo" [value]="undefined" required ngModel> <span>None</span>
+      <input type="radio" name="promo" [value]="undefined" ngModel> <span>None</span>
     </label>
     <label>
       <input type="radio" name="promo" value="new" required ngModel> <span>New</span>
@@ -26,7 +37,10 @@
     </label>
   </div>
   <label>
-    <textarea name="description" class="input input--textarea" required ngModel></textarea>
+    <textarea name="description" class="input input--textarea" required ngModel #description="ngModel"></textarea>
+    <ng-container *ngIf="description.invalid && (description.dirty || description.touched)">
+      <p class="item-form-error" *ngIf="description.errors?.['required']">Description is required</p>
+    </ng-container>
   </label>
   <pre>{{formRef.value | json}}</pre>
   <pre>{{formRef.form.status | json}}</pre>
