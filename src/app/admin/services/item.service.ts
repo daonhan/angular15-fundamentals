@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, delay, map, of, retry, retryWhen, take, tap, throwError } from 'rxjs';
 
 @Injectable({
@@ -14,7 +14,12 @@ export class ItemService {
     if (this.items.length) {
       return of(this.items);
     }
-    return this.httpClient.get<Item[]>('api/items').pipe(tap(items => this.items = items),
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    headers = headers.append('Authorization', 'Bearer 123fdsafd');
+    const options = { headers };
+    return this.httpClient.get<Item[]>('api/items', options).pipe(tap(items => this.items = items),
       retryWhen((errors) => errors.pipe(tap(console), delay(2000), take(2))), catchError(this.handleError));
   }
 
