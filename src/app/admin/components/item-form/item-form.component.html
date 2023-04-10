@@ -1,32 +1,33 @@
 <form class="item-form" #formRef="ngForm">
   <label>
     <span>Name</span>
-    <input type="text" class="input" name="name" placeholder="Name" ngModel>
+    <input type="text" class="input" name="name" placeholder="Name" required ngModel>
   </label>
   <label>
     <span>Price</span>
-    <input type="number" class="input" name="price" placeholder="Price" ngModel>
+    <input type="number" class="input" name="price" placeholder="Price" required ngModel>
   </label>
   <label>
     <span>Icon</span>
-    <select class="input" name="icon" ngModel>
+    <select class="input" name="icon" required ngModel>
       <option *ngFor="let icon of icons" [ngValue]="icon">{{icon}}</option>
     </select>
   </label>
   <div class="item-form-radios">
     <p class="item-form-radios-label">Promo:</p>
     <label>
-      <input type="radio" name="promo" [value]="undefined" ngModel> <span>None</span>
+      <input type="radio" name="promo" [value]="undefined" required ngModel> <span>None</span>
     </label>
     <label>
-      <input type="radio" name="promo" value="new" ngModel> <span>New</span>
+      <input type="radio" name="promo" value="new" required ngModel> <span>New</span>
     </label>
     <label>
-      <input type="radio" name="promo" value="limited" ngModel> <span>Limited</span>
+      <input type="radio" name="promo" value="limited" required ngModel> <span>Limited</span>
     </label>
   </div>
   <label>
-    <textarea name="description" class="input input--textarea" ngModel></textarea>
+    <textarea name="description" class="input input--textarea" required ngModel></textarea>
   </label>
   <pre>{{formRef.value | json}}</pre>
+  <pre>{{formRef.form.status | json}}</pre>
 </form>
