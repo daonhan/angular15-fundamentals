@@ -10,6 +10,19 @@ import { ItemDetailsComponent } from './containers/item-details/item-details.com
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemFormComponent } from './components/item-form/item-form.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
+export const routes: Routes = [
+  {
+    path: 'items',
+    component: ItemListComponent
+  },
+  {
+    path: 'item',
+    component: ItemDetailsComponent
+  },
+  { path: '', redirectTo: 'items', pathMatch: 'full' }
+];
 
 @NgModule({
   declarations:
@@ -21,9 +34,8 @@ import { FormsModule } from '@angular/forms';
     ],
   imports: [
     CommonModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  exports: [ItemListComponent, ItemDetailsComponent]
+    FormsModule,
+    RouterModule.forChild(routes)
+  ]
 })
 export class AdminModule { }
