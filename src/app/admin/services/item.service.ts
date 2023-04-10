@@ -5,6 +5,8 @@ import { Item } from '../models/item.model';
   providedIn: 'root'
 })
 export class ItemService {
+
+
   items: Item[] = [
     {
       id: '1',
@@ -31,4 +33,15 @@ export class ItemService {
     },
   ];
   constructor() { }
+  read(): Item[] {
+    return this.items;
+  }
+  readOne(id: string): Item {
+    const item = this.read().find(i => i.id === id);
+    if (item) {
+      return item;
+    }
+
+    return { name: '', icon: '', description: '', price: 0, };
+  }
 }

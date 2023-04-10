@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item.model';
+import { ItemService } from '../../services/item.service';
 
 @Component({
   selector: 'app-item-details',
@@ -8,15 +9,9 @@ import { Item } from '../../models/item.model';
 })
 export class ItemDetailsComponent implements OnInit {
   item!: Item;
+  constructor(private itemService: ItemService) { }
   ngOnInit(): void {
-    this.item = {
-      id: '1',
-      name: 'Just Chocolate',
-      icon: 'just-chocolate',
-      promo: 'new',
-      price: 100,
-      description: 'For the pure chocoholic'
-    };
+    this.item = this.itemService.readOne('1');
   }
 
   onCreate(item: Item) {
