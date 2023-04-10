@@ -1,4 +1,4 @@
-<form class="item-form" #formRef="ngForm">
+<form class="item-form" #form="ngForm" (ngSubmit)="handleSubmit(form)">
   <label>
     <span>Name</span>
     <input type="text" class="input" name="name" placeholder="Name" required minlength="5" ngModel #name="ngModel">
@@ -30,10 +30,10 @@
       <input type="radio" name="promo" [value]="undefined" ngModel> <span>None</span>
     </label>
     <label>
-      <input type="radio" name="promo" value="new" required ngModel> <span>New</span>
+      <input type="radio" name="promo" value="new" ngModel> <span>New</span>
     </label>
     <label>
-      <input type="radio" name="promo" value="limited" required ngModel> <span>Limited</span>
+      <input type="radio" name="promo" value="limited" ngModel> <span>Limited</span>
     </label>
   </div>
   <label>
@@ -42,6 +42,7 @@
       <p class="item-form-error" *ngIf="description.errors?.['required']">Description is required</p>
     </ng-container>
   </label>
-  <pre>{{formRef.value | json}}</pre>
-  <pre>{{formRef.form.status | json}}</pre>
+  <button type="submit" class="btn btn--green">Create</button>
+  <pre>{{form.value | json}}</pre>
+  <pre>{{form.form.status | json}}</pre>
 </form>

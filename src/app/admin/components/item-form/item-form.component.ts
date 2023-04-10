@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-item-form',
@@ -16,4 +17,12 @@ export class ItemFormComponent {
     'vanilla-sundae',
     'zesty-lemon',
   ];
+
+  handleSubmit(form: NgForm) {
+    if (form.valid) {
+      console.log(form.form.value);
+    } else {
+      form.form.markAllAsTouched();
+    }
+  }
 }
