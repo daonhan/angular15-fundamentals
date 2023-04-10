@@ -1,8 +1,6 @@
 <div>
   <ng-container *ngIf="items.length; else loading">
-    <app-item-card [data]="item"></app-item-card>
-    <app-item-card [data]="items[1]"></app-item-card>
-    <app-item-card [data]="items[2]"></app-item-card>
+    <app-item-card *ngFor="let item of items" [data]="item"></app-item-card>
   </ng-container>
   <ng-template #loading>
     <p>Loading...</p>
