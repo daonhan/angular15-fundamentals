@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class ItemFormComponent {
 
+  icons = [
+    'caramel-swirl',
+    'glazed-fudge',
+    'just-chocolate',
+    'sour-supreme',
+    'strawberry-glaze',
+    'vanilla-sundae',
+    'zesty-lemon',
+  ];
 }
