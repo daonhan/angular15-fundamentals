@@ -17,6 +17,7 @@ export class ItemListComponent implements OnInit {
         id: '1',
         name: 'Just Chocolate',
         icon: 'just-chocolate',
+        promo: 'new',
         price: 100,
         description: 'For the pure chocoholic'
       },
@@ -24,8 +25,8 @@ export class ItemListComponent implements OnInit {
         id: '2',
         name: 'Glazed Fudge',
         icon: 'glazed-fudge',
-        promo: true,
-        price: 129,
+        promo: 'limited',
+        price: 229,
         description: 'Sticky perfection.',
       },
       {
@@ -38,7 +39,7 @@ export class ItemListComponent implements OnInit {
     ];
     this.item = this.items[0];
   }
-  onTrackBy(index: number, item: Item) {
+  trackById(index: number, item: Item) {
     return item.id;
   }
 }

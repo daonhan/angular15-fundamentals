@@ -1,7 +1,12 @@
-<div class="item-card" [ngClass]="{'item-card-promo':data.promo}">
+<div class="item-card">
   <img src="/assets/img/{{data.icon}}.svg" [alt]="data.name" class="item-card-icon" />
   <div>
-    <p class="item-card-name">{{data.name}}</p>
+    <p class="item-card-name">{{data.name}}
+      <ng-container [ngSwitch]="data.promo">
+        <span class="item-card-label" *ngSwitchCase="'new'">NEW</span>
+        <span class="item-card-label" *ngSwitchCase="'limited'">LIMITED</span>
+      </ng-container>
+    </p>
     <p class="item-card-price">{{(data.price/100)|currency}}</p>
   </div>
 </div>
