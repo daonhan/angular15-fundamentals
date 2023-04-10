@@ -1,4 +1,4 @@
-<form class="item-form" #form="ngForm">
+<form class="item-form" #form="ngForm" *ngIf="item;else loading">
   <label>
     <span>Name</span>
     <input type="text" class="input" name="name" placeholder="Name" required minlength="5" [ngModel]="item.name"
@@ -55,3 +55,6 @@
   <pre>{{form.value | json}}</pre>
   <pre>{{form.form.status | json}}</pre>
 </form>
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

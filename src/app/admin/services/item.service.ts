@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
 import { HttpClient } from '@angular/common/http';
-import { of, tap } from 'rxjs';
+import { map, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +16,17 @@ export class ItemService {
     }
     return this.httpClient.get<Item[]>('api/items').pipe(tap(items => this.items = items));
   }
-  // readOne(id: string): Item {
-  //   const item = this.read().find(i => i.id === id);
-  //   if (item) {
-  //     return item;
-  //   }
 
-  //   return { name: '', icon: '', description: '', price: 0, };
-  // }
+  readOne(id: string) {
+    return this.read().pipe(map(items => {
+      const item = items.find(i => i.id === id);
+      if (item) {
+        return item;
+      }
+      return { name: '', icon: '', description: '', price: 0, };
+    }));
+
+  }
   create(playload: Item) {
     this.items = [...this.items, playload];
     console.log(this.items);
