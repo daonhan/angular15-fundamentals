@@ -9,13 +9,18 @@ import { ItemDetailsComponent } from './admin/containers/item-details/item-detai
 
 const routes: Routes = [
   {
-    path: 'items',
-    component: ItemListComponent
+    path: 'admin',
+    children: [
+      {
+        path: 'items',
+        component: ItemListComponent
+      },
+      {
+        path: 'item',
+        component: ItemDetailsComponent
+      }
+    ],
   },
-  {
-    path: 'item',
-    component: ItemDetailsComponent
-  }
 ]
 
 @NgModule({
