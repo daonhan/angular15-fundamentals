@@ -11,10 +11,13 @@ export class ItemDetailsComponent implements OnInit {
   item!: Item;
   constructor(private itemService: ItemService) { }
   ngOnInit(): void {
-    this.item = this.itemService.readOne('22');
+    this.item = this.itemService.readOne('1');
   }
 
   onCreate(item: Item) {
     this.itemService.create(item);
+  }
+  onUpdate(item: Item) {
+    this.itemService.update(item);
   }
 }

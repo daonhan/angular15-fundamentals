@@ -47,4 +47,14 @@ export class ItemService {
     this.items = [...this.items, playload];
     console.log(this.items);
   }
+
+  update(playload: Item) {
+    this.items = this.items.map(i => {
+      if (i.id === playload.id) {
+        return playload;
+      }
+      return i;
+    });
+    console.log(this.items);
+  }
 }

@@ -11,6 +11,7 @@ export class ItemFormComponent {
 
   @Input() item!: Item;
   @Output() create = new EventEmitter<Item>()
+  @Output() update = new EventEmitter<Item>()
 
   icons = [
     'caramel-swirl',
@@ -22,9 +23,16 @@ export class ItemFormComponent {
     'zesty-lemon',
   ];
 
-  handleSubmit(form: NgForm) {
+  handleCreate(form: NgForm) {
     if (form.valid) {
       this.create.emit(form.form.value);
+    } else {
+      form.form.markAllAsTouched();
+    }
+  }
+  handleUpdate(form: NgForm) {
+    if (form.valid) {
+      this.update.emit({ ...this.item, ...form.form.value });
     } else {
       form.form.markAllAsTouched();
     }

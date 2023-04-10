@@ -1,4 +1,4 @@
-<form class="item-form" #form="ngForm" (ngSubmit)="handleSubmit(form)">
+<form class="item-form" #form="ngForm">
   <label>
     <span>Name</span>
     <input type="text" class="input" name="name" placeholder="Name" required minlength="5" [ngModel]="item.name"
@@ -45,7 +45,8 @@
       <p class="item-form-error" *ngIf="description.errors?.['required']">Description is required</p>
     </ng-container>
   </label>
-  <button type="submit" class="btn btn--green">Create</button>
+  <button type="button" class="btn btn--green" (click)="handleCreate(form)">Create</button>
+  <button type="button" class="btn btn--green" (click)="handleUpdate(form)">Update</button>
   <button type="button" class="btn btn--gray" (click)="form.resetForm()">Reset</button>
   <div class="item-form-working" *ngIf="form.valid && form.submitted">
     Saving...

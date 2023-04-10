@@ -16,7 +16,7 @@ export class ItemListComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.items = this.itemService.items;
+    this.items = this.itemService.read();
     this.item = this.items[0];
   }
   trackById(index: number, item: Item) {
