@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Item } from '../../models/item.model';
 
 @Component({
   selector: 'app-item-details',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class ItemDetailsComponent {
 
+  onCreate(item: Item) {
+    console.log(item);
+  }
 }

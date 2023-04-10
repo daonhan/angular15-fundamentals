@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Item } from '../../models/item.model';
 
 @Component({
   selector: 'app-item-form',
@@ -7,6 +8,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./item-form.component.scss']
 })
 export class ItemFormComponent {
+
+  @Output() create = new EventEmitter<Item>()
 
   icons = [
     'caramel-swirl',
@@ -20,7 +23,7 @@ export class ItemFormComponent {
 
   handleSubmit(form: NgForm) {
     if (form.valid) {
-      console.log(form.form.value);
+      this.create.emit(form.form.value);
     } else {
       form.form.markAllAsTouched();
     }
