@@ -24,6 +24,7 @@ export class ItemListComponent implements OnInit {
         id: '2',
         name: 'Glazed Fudge',
         icon: 'glazed-fudge',
+        promo: true,
         price: 129,
         description: 'Sticky perfection.',
       },
