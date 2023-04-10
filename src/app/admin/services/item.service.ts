@@ -6,7 +6,6 @@ import { Item } from '../models/item.model';
 })
 export class ItemService {
 
-
   items: Item[] = [
     {
       id: '1',
@@ -43,5 +42,9 @@ export class ItemService {
     }
 
     return { name: '', icon: '', description: '', price: 0, };
+  }
+  create(playload: Item) {
+    this.items = [...this.items, playload];
+    console.log(this.items);
   }
 }
