@@ -3,6 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
+import { RouterModule, Routes } from '@angular/router';
+import { ItemListComponent } from './admin/containers/item-list/item-list.component';
+import { ItemDetailsComponent } from './admin/containers/item-details/item-details.component';
+
+const routes: Routes = [
+  {
+    path: 'items',
+    component: ItemListComponent
+  },
+  {
+    path: 'item',
+    component: ItemDetailsComponent
+  }
+]
 
 @NgModule({
   declarations: [
@@ -10,6 +24,7 @@ import { AdminModule } from './admin/admin.module';
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routes),
     AdminModule
   ],
   providers: [],
