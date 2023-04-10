@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Item } from '../../models/item.model';
 
@@ -9,6 +9,7 @@ import { Item } from '../../models/item.model';
 })
 export class ItemFormComponent {
 
+  @Input() item!: Item;
   @Output() create = new EventEmitter<Item>()
 
   icons = [
