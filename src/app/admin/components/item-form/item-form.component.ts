@@ -10,8 +10,9 @@ import { Item } from '../../models/item.model';
 export class ItemFormComponent {
 
   @Input() item!: Item;
-  @Output() create = new EventEmitter<Item>()
-  @Output() update = new EventEmitter<Item>()
+  @Output() create = new EventEmitter<Item>();
+  @Output() update = new EventEmitter<Item>();
+  @Output() delete = new EventEmitter<Item>();
 
   icons = [
     'caramel-swirl',
@@ -37,4 +38,10 @@ export class ItemFormComponent {
       form.form.markAllAsTouched();
     }
   }
+  handleDelete() {
+    if (confirm(`Do you want to delete '${this.item?.name}'?`)) {
+      this.delete.emit(this.item);
+    }
+  }
+
 }

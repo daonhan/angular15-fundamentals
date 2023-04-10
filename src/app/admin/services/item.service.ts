@@ -57,4 +57,8 @@ export class ItemService {
     });
     console.log(this.items);
   }
+  delete(playload: Item) {
+    this.items = this.items.filter(i => i.id !== playload.id);
+    console.log(this.items);
+  }
 }

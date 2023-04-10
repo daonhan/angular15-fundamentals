@@ -20,4 +20,7 @@ export class ItemDetailsComponent implements OnInit {
   onUpdate(item: Item) {
     this.itemService.update(item);
   }
+  onDelete(playload: Item) {
+    this.itemService.delete(playload);
+  }
 }

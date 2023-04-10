@@ -47,6 +47,7 @@
   </label>
   <button type="button" class="btn btn--green" (click)="handleCreate(form)">Create</button>
   <button type="button" class="btn btn--green" (click)="handleUpdate(form)">Update</button>
+  <button type="button" class="btn btn--green" (click)="handleDelete()">Delete</button>
   <button type="button" class="btn btn--gray" (click)="form.resetForm()">Reset</button>
   <div class="item-form-working" *ngIf="form.valid && form.submitted">
     Saving...
