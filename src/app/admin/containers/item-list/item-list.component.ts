@@ -38,5 +38,7 @@ export class ItemListComponent implements OnInit {
     ];
     this.item = this.items[0];
   }
-
+  onTrackBy(index: number, item: Item) {
+    return item.id;
+  }
 }
