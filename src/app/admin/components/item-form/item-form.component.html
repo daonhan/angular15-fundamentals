@@ -1,8 +1,7 @@
 <form class="item-form" #form="ngForm" (ngSubmit)="handleSubmit(form)">
   <label>
     <span>Name</span>
-    <input type="text" class="input" name="name" placeholder="Name" required minlength="5" ngModel #name="ngModel"
-      [ngModelOptions]="{updateOn:'blur'}">
+    <input type="text" class="input" name="name" placeholder="Name" required minlength="5" ngModel #name="ngModel">
     <ng-container *ngIf="name.invalid && (name.dirty || name.touched)">
       <p class="item-form-error" *ngIf="name.errors?.['required']">Name is required</p>
       <p class="item-form-error" *ngIf="name.errors?.['minlength']">Minimum length of a name is 5!</p>
@@ -45,6 +44,9 @@
   </label>
   <button type="submit" class="btn btn--green">Create</button>
   <button type="button" class="btn btn--gray" (click)="form.resetForm()">Reset</button>
+  <div class="item-form-working" *ngIf="form.valid && form.submitted">
+    Saving...
+  </div>
   <pre>{{form.value | json}}</pre>
   <pre>{{form.form.status | json}}</pre>
 </form>
