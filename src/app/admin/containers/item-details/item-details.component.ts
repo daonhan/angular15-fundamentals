@@ -15,12 +15,18 @@ export class ItemDetailsComponent implements OnInit {
   }
 
   onCreate(item: Item) {
-    this.itemService.create(item);
+    this.itemService.create(item).subscribe((item) => {
+      console.log(`Created successful!`)
+    });
   }
   onUpdate(item: Item) {
-    this.itemService.update(item);
+    this.itemService.update(item).subscribe((item) => {
+      console.log(`Updated successful!`)
+    });
   }
   onDelete(playload: Item) {
-    this.itemService.delete(playload);
+    this.itemService.delete(playload).subscribe(() => {
+      console.log('Deleted successful');
+    });
   }
 }

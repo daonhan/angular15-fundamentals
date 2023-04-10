@@ -28,21 +28,25 @@ export class ItemService {
 
   }
   create(playload: Item) {
-    this.items = [...this.items, playload];
-    console.log(this.items);
+    return this.httpClient.post<Item>(`/api/items`, playload).pipe(tap((item: Item) => {
+      this.items = [...this.items, item];
+    }));
   }
 
   update(playload: Item) {
-    this.items = this.items.map(i => {
-      if (i.id === playload.id) {
-        return playload;
-      }
-      return i;
-    });
-    console.log(this.items);
+    return this.httpClient.put<Item>(`/api/items/${playload.id}`, playload).pipe(
+      map((item: Item) => {
+        this.items = this.items.map(i => {
+          if (i.id === playload.id) {
+            return playload;
+          }
+          return i;
+        });
+      }));
   }
   delete(playload: Item) {
-    this.items = this.items.filter(i => i.id !== playload.id);
-    console.log(this.items);
+    return this.httpClient.delete(`/api/items/${playload.id}`).pipe(tap(() => {
+      this.items = this.items.filter(i => i.id !== playload.id);
+    }));
   }
 }
