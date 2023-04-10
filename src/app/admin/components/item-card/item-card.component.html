@@ -1,4 +1,4 @@
-<div class="item-card">
+<a [routerLink]="data.id" class="item-card" [ngClass]="{'item-card-promo':data.promo}">
   <img src="/assets/img/{{data.icon}}.svg" [alt]="data.name" class="item-card-icon" />
   <div>
     <p class="item-card-name">{{data.name}}
@@ -9,4 +9,4 @@
     </p>
     <p class="item-card-price">{{(data.price/100)|currency}}</p>
   </div>
-</div>
+</a>
