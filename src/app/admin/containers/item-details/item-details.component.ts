@@ -11,7 +11,7 @@ export class ItemDetailsComponent implements OnInit {
   item!: Item;
   constructor(private itemService: ItemService) { }
   ngOnInit(): void {
-    this.itemService.readOne('12').subscribe(item => this.item = item);
+    this.itemService.readOne('1').subscribe(item => this.item = item);
   }
 
   onCreate(item: Item) {

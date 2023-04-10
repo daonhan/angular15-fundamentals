@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, of, tap, throwError } from 'rxjs';
+import { catchError, map, of, retry, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class ItemService {
     if (this.items.length) {
       return of(this.items);
     }
-    return this.httpClient.get<Item[]>('api/items').pipe(tap(items => this.items = items));
+    return this.httpClient.get<Item[]>('api/items').pipe(tap(items => this.items = items), retry(2));
   }
 
   readOne(id: string) {
