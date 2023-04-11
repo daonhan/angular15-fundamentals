@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "db": "json-server --watch db.json --delay 1000",
+    "auth": "json-server-auth --watch db.json --delay 1000",
     "test": "ng test",
     "lint": "ng lint"
   },

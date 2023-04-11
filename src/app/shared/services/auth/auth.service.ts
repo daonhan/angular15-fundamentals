@@ -23,12 +23,13 @@ export class AuthService {
 
   get isAuthenticated(): boolean {
     const userInfo = this.userTokenSubject$.value as UserInfo;
-    const { token = '' } = userInfo;
-    return userInfo && token.length > 0;
+    const { accessToken = '' } = userInfo;
+    return userInfo && accessToken.length > 0;
   }
   login(playload: UserInfo) {
     localStorage.setItem(AUTHORIZATION_KEY, JSON.stringify(playload));
     this.userTokenSubject$.next(playload);
+    this.router.navigateByUrl('/');
   }
 
   logout() {

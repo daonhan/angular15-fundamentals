@@ -1,0 +1,27 @@
+<form class="login-form" #form="ngForm" (ngSubmit)="handleLogin(form)">
+  <label>
+    <span>Username</span>
+    <input type="text" minlength="6" class="input" required name="username" ngModel #username="ngModel">
+    <ng-container *ngIf="username.invalid && (username.dirty ||  username.touched)">
+      <p class="login-form-error" *ngIf="username.errors?.['minlength']" (ngSubmit)="handleLogin(form)">
+        Minimum length of a username is 6!
+      </p>
+      <p class="login-form-error" *ngIf="username.errors?.['required']" (ngSubmit)="handleLogin(form)">
+        Username is required
+      </p>
+    </ng-container>
+  </label>
+  <label>
+    <span>Password</span>
+    <input type="password" minlength="6" class="input" required name="password" ngModel #password="ngModel">
+    <ng-container *ngIf="password.invalid && (username.dirty ||  username.touched)">
+      <p class="login-form-error" *ngIf="password.errors?.['minlength']" (ngSubmit)="handleLogin(form)">
+        Minimum length of a password is 6!
+      </p>
+      <p class="login-form-error" *ngIf="password.errors?.['required']" (ngSubmit)="handleLogin(form)">
+        Password is required
+      </p>
+    </ng-container>
+  </label>
+  <button type="submit" class="btn btn--green" [disabled]="form.invalid">Login</button>
+</form>

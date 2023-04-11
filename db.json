@@ -23,5 +23,15 @@
       "price": 129,
       "description": "Chocolate drizzled with caramel."
     }
+  ],
+  "users": [
+    {
+      "email": "nhan.nguyen@truecommerce.com",
+      "password": "$2a$10$GL7h9djfHZ9xUu1MFmAeA.BIa3wVglwJawLcgE5oesMvEV/RU0ur.",
+      "firstname": "Nhan",
+      "lastname": "Nguyen",
+      "age": 47,
+      "id": 1
+    }
   ]
 }
