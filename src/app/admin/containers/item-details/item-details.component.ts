@@ -11,7 +11,7 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class ItemDetailsComponent implements OnInit {
   isEdit!: boolean;
-  item$ = this.route.paramMap.pipe(map((p) => p.get('id')), switchMap((id) => this.itemService.readOne(id)))
+  item$ = this.route.data.pipe(map(({ item }) => item))
   constructor(
     private route: ActivatedRoute,
     private router: Router,

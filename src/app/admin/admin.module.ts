@@ -11,7 +11,9 @@ import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemFormComponent } from './components/item-form/item-form.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-
+import { ItemResolver } from './resovers/item.resolver';
+import { Item } from './models/item.model';
+export const EMPTY_ITEM: Item = { name: '', icon: '', description: '', price: 0, }
 export const routes: Routes = [
   {
     path: 'items',
@@ -20,11 +22,13 @@ export const routes: Routes = [
   {
     path: 'items/new',
     component: ItemDetailsComponent,
+    data: { item: { ...EMPTY_ITEM } }
   },
   {
     path: 'items/:id',
     component: ItemDetailsComponent,
-    data: { isEdit: true }
+    data: { isEdit: true },
+    resolve: { item: ItemResolver }
   },
   { path: '', redirectTo: 'items', pathMatch: 'full' }
 ];

@@ -31,10 +31,9 @@ export class ItemService {
       }
       return { name: '', icon: '', description: '', price: 0, };
     }));
-
   }
   getItem(id: string | null) {
-    return this.httpClient.get<Item>(`/api/items/${id}`).pipe(catchError(this.handleError), delay(10000));
+    return this.httpClient.get<Item>(`/api/items/${id}`).pipe(catchError(this.handleError));
   }
   create(playload: Item) {
     return this.httpClient.post<Item>(`/api/items`, playload).pipe(tap((item: Item) => {
