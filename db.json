@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "name": "Just Chocolate",
+      "icon": "just-chocolate",
+      "promo": "new",
+      "price": 100,
+      "description": "For the pure chocoholic"
+    },
+    {
+      "id": "2",
+      "name": "Glazed Fudge",
+      "icon": "glazed-fudge",
+      "promo": "limited",
+      "price": 229,
+      "description": "Sticky perfection."
+    },
+    {
+      "id": "3",
+      "name": "Caramel Swirl",
+      "icon": "caramel-swirl",
+      "price": 129,
+      "description": "Chocolate drizzled with caramel."
+    }
+  ],
+  "users": [
+    {
+      "email": "nhan.nguyen@truecommerce.com",
+      "password": "$2a$10$GL7h9djfHZ9xUu1MFmAeA.BIa3wVglwJawLcgE5oesMvEV/RU0ur.",
+      "firstname": "Nhan",
+      "lastname": "Nguyen",
+      "age": 47,
+      "id": 1
+    }
+  ]
+}

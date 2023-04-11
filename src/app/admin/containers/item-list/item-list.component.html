@@ -1,0 +1,13 @@
+<div>
+  <div class="item-list-actions">
+    <a class="btn btn--green" routerLink="new">
+      New Item
+    </a>
+  </div>
+  <ng-container *ngIf="items.length; else loading">
+    <app-item-card *ngFor="let item of items; trackBy: trackById" [data]="item"></app-item-card>
+  </ng-container>
+  <ng-template #loading>
+    <p>Loading...</p>
+  </ng-template>
+</div>

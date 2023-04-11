@@ -1,0 +1,55 @@
+<form class="item-form" #form="ngForm" *ngIf="item">
+  <label>
+    <span>Name</span>
+    <input type="text" class="input" name="name" placeholder="Name" required minlength="5" [ngModel]="item.name"
+      #name="ngModel">
+    <ng-container *ngIf="name.invalid && (name.dirty || name.touched)">
+      <p class="item-form-error" *ngIf="name.errors?.['required']">Name is required</p>
+      <p class="item-form-error" *ngIf="name.errors?.['minlength']">Minimum length of a name is 5!</p>
+    </ng-container>
+  </label>
+  <label>
+    <span>Price</span>
+    <input type="number" class="input" name="price" min="0" placeholder="Price" required [ngModel]="item.price"
+      #price="ngModel">
+    <ng-container *ngIf="price.invalid && (price.dirty || price.touched)">
+      <p class="item-form-error" *ngIf="price.errors?.['required']">Price is required</p>
+      <p class="item-form-error" *ngIf="price.errors?.['min']">Minimum of a price is 0!</p>
+    </ng-container>
+  </label>
+  <label>
+    <span>Icon</span>
+    <select class="input" name="icon" required [ngModel]="item.icon" #icon="ngModel">
+      <option *ngFor="let icon of icons" [ngValue]="icon">{{icon}}</option>
+    </select>
+    <ng-container *ngIf="icon.invalid && (icon.dirty || icon.touched)">
+      <p class="item-form-error" *ngIf="icon.errors?.['required']">Icon is required</p>
+    </ng-container>
+  </label>
+  <div class="item-form-radios">
+    <p class="item-form-radios-label">Promo:</p>
+    <label>
+      <input type="radio" name="promo" [value]="undefined" [ngModel]="item.promo"> <span>None</span>
+    </label>
+    <label>
+      <input type="radio" name="promo" value="new" [ngModel]="item.promo"> <span>New</span>
+    </label>
+    <label>
+      <input type="radio" name="promo" value="limited" [ngModel]="item.promo"> <span>Limited</span>
+    </label>
+  </div>
+  <label>
+    <textarea name="description" class="input input--textarea" required [ngModel]="item.description"
+      #description="ngModel"></textarea>
+    <ng-container *ngIf="description.invalid && (description.dirty || description.touched)">
+      <p class="item-form-error" *ngIf="description.errors?.['required']">Description is required</p>
+    </ng-container>
+  </label>
+  <button type="button" class="btn btn--green" (click)="handleCreate(form)" *ngIf="!isEdit">Create</button>
+  <button type="button" class="btn btn--green" (click)="handleUpdate(form)" *ngIf="isEdit">Update</button>
+  <button type="button" class="btn btn--green" (click)="handleDelete()" *ngIf="isEdit">Delete</button>
+  <button type="button" class="btn btn--gray" (click)="form.resetForm()" *ngIf="form.touched || isEdit">Reset</button>
+  <div class="item-form-working" *ngIf="form.valid && form.submitted">
+    Saving...
+  </div>
+</form>
