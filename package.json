@@ -9,7 +9,11 @@
     "db": "json-server --watch db.json --delay 1000",
     "auth": "json-server-auth --watch db.json --delay 1000",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "analyze:dev": "ng build --configuration=development --stats-json && webpack-bundle-analyzer ./dist/angular15-fundamentals/stats.json",
+    "exploring:dev": "ng build --configuration=development --source-map && source-map-explorer ./dist/angular15-fundamentals/**/*.js",
+    "analyze": "ng build --stats-json && webpack-bundle-analyzer ./dist/angular15-fundamentals/stats.json",
+    "exploring": "ng build --source-map && source-map-explorer ./dist/angular15-fundamentals/**/*.js"
   },
   "private": true,
   "dependencies": {
