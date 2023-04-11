@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -7,24 +7,26 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { APP_CONFIG } from '../services/app-config.service';
+import { AppConfig } from '../models/appconfig.model';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(@Inject(APP_CONFIG) private appConfig: AppConfig, private authService: AuthService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     const isAuthenticated = this.authService.isAuthenticated;
     if (isAuthenticated) {
-      const whiteListUrls = ['http://localhost:4200', 'http://localhost:3000']; // TODO: get from config
+      const { baseUrl = '', apiUrl = '' } = this.appConfig;
+      const whiteListUrls = [baseUrl, apiUrl];
 
       let currentUrl = request.url.toLowerCase();
       if (!currentUrl.startsWith('http')) {
-        currentUrl = `http://localhost:4200/${currentUrl}`;
+        currentUrl = `${baseUrl}/${currentUrl}`;
       }
-      if (whiteListUrls.some((apiRul) => currentUrl.startsWith(apiRul))) {
+      if (whiteListUrls.some((apiUrl) => apiUrl && currentUrl.startsWith(apiUrl))) {
         const { accessToken } = this.authService.getCurrentUserInfo();
         request = request.clone({
           setHeaders: {
