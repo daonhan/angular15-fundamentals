@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item.model';
 import { ItemService } from '../../services/item.service';
 import { ActivatedRoute } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-item-details',
@@ -11,13 +12,13 @@ import { ActivatedRoute } from '@angular/router';
 export class ItemDetailsComponent implements OnInit {
   item!: Item;
   isEdit!: boolean;
+  item$ = this.route.paramMap.pipe(map((p) => p.get('id')), switchMap((id) => this.itemService.getItem(id)))
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService) { }
+
   ngOnInit(): void {
     this.isEdit = this.route.snapshot.data['isEdit'];
-    const id = this.route.snapshot.paramMap.get('id');
-    this.itemService.readOne(id).subscribe(item => this.item = item);
   }
 
   onCreate(item: Item) {

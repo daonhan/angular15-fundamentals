@@ -1,4 +1,4 @@
-<div>
-  <app-item-form (create)="onCreate($event)" (update)="onUpdate($event)" (delete)="onDelete($event)" [item]="item"
+<div *ngIf="(item$|async) as data">
+  <app-item-form (create)="onCreate($event)" (update)="onUpdate($event)" (delete)="onDelete($event)" [item]="data"
     [isEdit]="isEdit"></app-item-form>
 </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, delay, map, of, retry, retryWhen, take, tap, throwError } from 'rxjs';
+import { catchError, delay, map, of, retryWhen, take, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,9 @@ export class ItemService {
       return { name: '', icon: '', description: '', price: 0, };
     }));
 
+  }
+  getItem(id: string | null) {
+    return this.httpClient.get<Item>(`/api/items/${id}`).pipe(catchError(this.handleError), delay(10000));
   }
   create(playload: Item) {
     return this.httpClient.post<Item>(`/api/items`, playload).pipe(tap((item: Item) => {
