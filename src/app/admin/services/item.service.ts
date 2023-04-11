@@ -14,13 +14,8 @@ export class ItemService {
     if (this.items.length) {
       return of(this.items);
     }
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    headers = headers.append('Authorization', 'Bearer 123fdsafd');
-    const options = { headers };
-    return this.httpClient.get<Item[]>('api/items', options).pipe(tap(items => this.items = items),
-      retryWhen((errors) => errors.pipe(tap(console), delay(2000), take(2))), catchError(this.handleError));
+    return this.httpClient.get<Item[]>('api/items').pipe(tap(items => this.items = items),
+      retryWhen((errors) => errors.pipe(tap(console.log), delay(2000), take(2))), catchError(this.handleError));
   }
 
   readOne(id: string | null) {

@@ -11,7 +11,6 @@ export const AUTHORIZATION_KEY = 'tc-user-token';
   providedIn: 'root'
 })
 export class AuthService {
-
   private userTokenSubject$ = new BehaviorSubject<UserInfo | null>(this.getUserInfo());
   currentUserInfo$ = this.userTokenSubject$.asObservable();
 
@@ -25,6 +24,9 @@ export class AuthService {
     const userInfo = this.userTokenSubject$.value as UserInfo;
     const { accessToken = '' } = userInfo;
     return userInfo && accessToken.length > 0;
+  }
+  getCurrentUserInfo(): UserInfo {
+    return this.userTokenSubject$.value as UserInfo;
   }
   login(playload: UserInfo) {
     localStorage.setItem(AUTHORIZATION_KEY, JSON.stringify(playload));
