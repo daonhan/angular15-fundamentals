@@ -2,11 +2,12 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadingStrategy, RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { AppConfigService } from './shared/services/app-config.service';
+import { AuthPreloadStrategy } from './shared/services/auth/auth-preload-strategy';
 
 function appInitializerFactory(appConfigService: AppConfigService) {
   return appConfigService.load();
@@ -41,7 +42,9 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: AuthPreloadStrategy
+    })
   ],
   providers: [
     AppConfigService,
