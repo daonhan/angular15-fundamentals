@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -6,6 +6,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { AppConfigService } from './shared/services/app-config.service';
+
+function appInitializerFactory(appConfigService: AppConfigService) {
+  return appConfigService.load();
+}
+
 
 const routes: Routes = [
   {
@@ -38,6 +44,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
+    AppConfigService,
+    { provide: APP_INITIALIZER, useFactory: appInitializerFactory, deps: [AppConfigService] },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
