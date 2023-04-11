@@ -1,4 +1,5 @@
-<div *ngIf="(item$|async) as data">
+<div *ngIf="(item$|async) as data;else loading">
   <app-item-form (create)="onCreate($event)" (update)="onUpdate($event)" (delete)="onDelete($event)" [item]="data"
     [isEdit]="isEdit"></app-item-form>
 </div>
+<ng-template #loading>Loading...</ng-template>

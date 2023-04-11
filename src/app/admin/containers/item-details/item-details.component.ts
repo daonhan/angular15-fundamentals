@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item.model';
 import { ItemService } from '../../services/item.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -10,11 +10,11 @@ import { map, switchMap } from 'rxjs/operators';
   styleUrls: ['./item-details.component.scss']
 })
 export class ItemDetailsComponent implements OnInit {
-  item!: Item;
   isEdit!: boolean;
-  item$ = this.route.paramMap.pipe(map((p) => p.get('id')), switchMap((id) => this.itemService.getItem(id)))
+  item$ = this.route.paramMap.pipe(map((p) => p.get('id')), switchMap((id) => this.itemService.readOne(id)))
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private itemService: ItemService) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class ItemDetailsComponent implements OnInit {
   onCreate(item: Item) {
     this.itemService.create(item).subscribe({
       next: (item) => {
-        console.log(`Created successful!`)
+        this.router.navigate(['admin', 'items', item.id]);
       },
       error: (err) => console.error(err)
     });
@@ -32,7 +32,7 @@ export class ItemDetailsComponent implements OnInit {
   onUpdate(item: Item) {
     this.itemService.update(item).subscribe({
       next: () => {
-        console.log(`Updated successful!`)
+        this.router.navigate(['admin']);
       },
       error: (err) => {
         console.error(err);
@@ -42,7 +42,7 @@ export class ItemDetailsComponent implements OnInit {
   onDelete(playload: Item) {
     this.itemService.delete(playload).subscribe({
       next: () => {
-        console.log('Deleted successful');
+        this.router.navigate(['admin']);
       },
       error: (err) => { console.error(err) }
     });
