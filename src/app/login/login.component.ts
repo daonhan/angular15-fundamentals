@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from '../shared/services/auth/auth.service';
 import { NgForm } from '@angular/forms';
 import { LoginService } from './login.service';
-import { Subject, catchError, exhaustMap, takeUntil, throwError } from 'rxjs';
+import { EMPTY, Subject, catchError, exhaustMap, takeUntil, throwError } from 'rxjs';
 export interface UserLogin {
   email: string;
   password: string;
@@ -16,7 +16,13 @@ export class LoginComponent implements OnDestroy {
   private onDestroy$ = new Subject<void>();
   submitted$ = new Subject<UserLogin>();
   constructor(private authService: AuthService, private loginService: LoginService) {
-    const login$ = this.submitted$.pipe(exhaustMap(({ email, password }) => this.loginService.login(email, password).pipe(takeUntil(this.onDestroy$), catchError((err) => throwError(() => new Error(err.message))))));
+    const login$ = this.submitted$.pipe(
+      exhaustMap(
+        ({ email, password }) => this.loginService.login(email, password).pipe(catchError((err) => {
+          console.error(err.message);
+          return EMPTY;
+        }))),
+      takeUntil(this.onDestroy$));
 
     login$.subscribe({
       next: (a: any) => {
