@@ -54,12 +54,12 @@ export class ItemService {
   }
 
   private handleError(err: HttpErrorResponse) {
-    if (err instanceof ErrorEvent) {
+    if (err.error instanceof ErrorEvent) {
       // client side
-      console.error(err)
+      console.error(err.error.message);
     } else {
       // server side
-      console.error('Server', err.status)
+      console.error('Server', err.status);
     }
     return throwError(() => new Error(err.message));
   }
